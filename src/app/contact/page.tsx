@@ -15,12 +15,12 @@ import {
 const socials = [
   {
     label: "GitHub",
-    href: "https://github.com/",
+    href: "https://github.com/Yashkashyap12",
     icon: FiGithub,
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/",
+    href: "https://www.linkedin.com/in/yash-kashyap-2038b6241/",
     icon: FiLinkedin,
   },
 ];

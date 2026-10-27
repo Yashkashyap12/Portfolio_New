@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -10,6 +9,7 @@ import {
   FiLinkedin,
   FiLayers,
 } from "react-icons/fi";
+import { FaCode } from "react-icons/fa";
 
 const technologies = [
   "React",
@@ -75,7 +75,7 @@ const Hero = () => {
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <motion.div
           aria-hidden="true"
-          className="absolute -right-40 -top-20 h-125 w-125 rounded-full bg-violet-200/35 blur-[110px]"
+          className="absolute -right-40 -top-20 h-125 w-125 rounded-full bg-amber-100/30 blur-[110px]"
           animate={
             shouldReduceMotion
               ? undefined
@@ -90,7 +90,7 @@ const Hero = () => {
 
         <motion.div
           aria-hidden="true"
-          className="absolute -left-40 bottom-0 h-87.5 w-87.5 rounded-full bg-indigo-100/40 blur-[100px]"
+          className="absolute -left-40 bottom-0 h-87.5 w-87.5 rounded-full bg-orange-100/40 blur-[100px]"
           animate={
             shouldReduceMotion
               ? undefined
@@ -158,10 +158,10 @@ const Hero = () => {
               </span>
 
               <span className="mt-2 block whitespace-nowrap text-zinc-500">
-                KASHYAP<span className="text-violet-700">.</span>
+                KASHYAP<span className="text-amber-600">.</span>
               </span>
 
-              <span className="mt-5 block text-[0.32em] font-semibold leading-tight tracking-tight text-violet-700 sm:text-[0.35em]">
+              <span className="mt-5 block text-[0.32em] font-semibold leading-tight tracking-tight text-amber-700 sm:text-[0.35em]">
                 Full Stack Developer
               </span>
             </motion.h1>
@@ -183,7 +183,7 @@ const Hero = () => {
             >
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-7 rounded-full bg-[#18181b] px-6 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-violet-700 hover:shadow-lg hover:shadow-violet-900/10"
+                className="group inline-flex items-center gap-7 rounded-full hover:bg-amber-500 px-6 py-4 text-sm font-semibold text-white transition-all duration-300 bg-amber-700 hover:shadow-lg hover:shadow-amber-900/10"
               >
                 Explore my work
 
@@ -195,7 +195,7 @@ const Hero = () => {
 
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/70 px-6 py-4 text-sm font-semibold text-zinc-800 transition-all duration-300 hover:border-violet-300 hover:bg-violet-50"
+                className="group inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/70 px-6 py-4 text-sm font-semibold text-zinc-800 transition-all duration-300 hover:border-amber-500 hover:bg-amber-50"
               >
                 Let&apos;s connect
 
@@ -218,21 +218,21 @@ const Hero = () => {
               <span className="h-px w-8 bg-zinc-300" />
 
               <Link
-                href="https://github.com/"
+                href="https://github.com/Yashkashyap12"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="text-zinc-500 transition-colors hover:text-violet-700"
+                className="text-zinc-500 transition-colors hover:text-amber-700"
               >
                 <FiGithub size={20} />
               </Link>
 
               <Link
-                href="https://linkedin.com/"
+                href="https://www.linkedin.com/in/yash-kashyap-2038b6241/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="text-zinc-500 transition-colors hover:text-violet-700"
+                className="text-zinc-500 transition-colors hover:text-amber-700"
               >
                 <FiLinkedin size={20} />
               </Link>
@@ -249,7 +249,7 @@ const Hero = () => {
             {/* Decorative frames */}
             <motion.div
               aria-hidden="true"
-              className="absolute inset-3 rotate-3 rounded-[2rem] border border-violet-200/80"
+              className="absolute inset-3 rotate-3 rounded-[2rem] border border-amber-200/80"
               animate={
                 shouldReduceMotion
                   ? undefined
@@ -300,19 +300,21 @@ const Hero = () => {
 
                 <motion.div
                   whileHover={
-                    shouldReduceMotion ? undefined : { rotate: 12, scale: 1.05 }
+                    shouldReduceMotion
+                      ? undefined
+                      : { rotate: 12, scale: 1.05 }
                   }
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-violet-50 text-violet-700"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-700"
                 >
                   <FiLayers size={21} />
                 </motion.div>
               </div>
 
               {/* Abstract illustration */}
-              <div className="relative flex h-70 items-center justify-center overflow-hidden bg-linear-to-br from-[#f8f6ff] via-white to-[#f1efff] sm:h-80">
+              <div className="relative flex h-70 items-center justify-center overflow-hidden bg-linear-to-br from-[#fffbeb] via-white to-[#fff7ed] sm:h-80">
                 <motion.div
                   aria-hidden="true"
-                  className="absolute h-61.25 w-61.25 rounded-full border border-violet-200/80"
+                  className="absolute h-61.25 w-61.25 rounded-full border border-amber-200/80"
                   animate={
                     shouldReduceMotion ? undefined : { rotate: 360 }
                   }
@@ -325,7 +327,7 @@ const Hero = () => {
 
                 <motion.div
                   aria-hidden="true"
-                  className="absolute h-50 w-50 rounded-full border border-dashed border-violet-300/80"
+                  className="absolute h-50 w-50 rounded-full border border-dashed border-amber-300/80"
                   animate={
                     shouldReduceMotion ? undefined : { rotate: -360 }
                   }
@@ -337,7 +339,7 @@ const Hero = () => {
                 />
 
                 <motion.div
-                  className="absolute h-40 w-40 -rotate-12 rounded-[40px] border border-white bg-linear-to-br from-violet-500 via-violet-600 to-indigo-700 shadow-[0_25px_60px_-20px_rgba(109,40,217,0.55)]"
+                  className="absolute h-40 w-40 -rotate-12 rounded-[40px] border border-white bg-linear-to-br from-amber-500 via-amber-600 to-orange-700 shadow-[0_25px_60px_-20px_rgba(217,119,6,0.45)]"
                   animate={
                     shouldReduceMotion
                       ? undefined
@@ -367,7 +369,7 @@ const Hero = () => {
                   }}
                 >
                   <span className="text-4xl font-semibold tracking-[-0.08em]">
-                    YK<span className="text-violet-200">.</span>
+                    YK<span className="text-amber-200"> .</span>
                   </span>
                 </motion.div>
 
@@ -410,7 +412,7 @@ const Hero = () => {
                     Philosophy
                   </p>
 
-                  <p className="mt-1 text-xs font-semibold text-violet-700">
+                  <p className="mt-1 text-xs font-semibold text-amber-700">
                     Build better.
                   </p>
                 </motion.div>
@@ -428,8 +430,8 @@ const Hero = () => {
                   </p>
                 </div>
 
-                <span className="rounded-full bg-emerald-50 px-3 py-1.5 text-[10px] font-semibold text-emerald-700">
-                  Creating
+                <span className="rounded-full bg-amber-100 px-3 py-3 text-[10px] font-semibold text-emerald-700">
+                  <FaCode className="size-4"/>
                 </span>
               </div>
             </motion.div>
@@ -454,7 +456,7 @@ const Hero = () => {
                 <motion.span
                   key={technology}
                   variants={fadeUp}
-                  className="text-xs font-semibold tracking-wide text-zinc-500 transition-colors hover:text-violet-700 sm:text-sm"
+                  className="text-xs font-semibold tracking-wide text-zinc-500 transition-colors hover:text-amber-700 sm:text-sm"
                 >
                   {technology}
                 </motion.span>
