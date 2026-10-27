@@ -1,8 +1,8 @@
-
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import {
   FiArrowDownRight,
   FiArrowUpRight,
@@ -41,22 +41,22 @@ const About = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.25,
-        delayChildren: shouldReduceMotion ? 0 : 0.2,
+        staggerChildren: shouldReduceMotion ? 0 : 0.12,
+        delayChildren: shouldReduceMotion ? 0 : 0.1,
       },
     },
   };
 
   const viewport = {
     once: true,
-    amount: 0.2,
+    amount: 0.1,
   };
 
   return (
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative isolate overflow-hidden bg-[#faf9f6] text-[#171717]"
+      className="relative isolate overflow-hidden bg-[#faf9f6] dark:bg-[#0b0b0c] text-[#171717] dark:text-zinc-100"
     >
       {/* Background effects */}
       <div
@@ -64,7 +64,7 @@ const About = () => {
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
         <motion.div
-          className="absolute -left-40 top-20 h-80 w-80 rounded-full bg-violet-200/25 blur-[110px]"
+          className="absolute -left-40 top-20 h-80 w-80 rounded-full bg-amber-200/25 dark:bg-amber-500/10 blur-[110px]"
           animate={
             shouldReduceMotion
               ? undefined
@@ -78,7 +78,7 @@ const About = () => {
         />
 
         <motion.div
-          className="absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-indigo-100/35 blur-[110px]"
+          className="absolute -bottom-40 right-0 h-96 w-96 rounded-full bg-orange-100/35 dark:bg-amber-500/10 blur-[110px]"
           animate={
             shouldReduceMotion
               ? undefined
@@ -101,7 +101,7 @@ const About = () => {
         />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-28 lg:px-12 lg:py-18">
+      <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-28 lg:px-12 lg:py-24">
         {/* Section label */}
         <motion.div
           variants={staggerContainer}
@@ -114,16 +114,16 @@ const About = () => {
             variants={fadeUp}
             className="flex items-center gap-3"
           >
-            <span className="h-px w-8 bg-violet-600 sm:w-12" />
+            <span className="h-px w-8 bg-amber-600 sm:w-12" />
 
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 sm:text-xs">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 sm:text-xs">
               01 / About me
             </span>
           </motion.div>
 
           <motion.span
             variants={fadeUp}
-            className="hidden text-xs text-zinc-400 sm:block"
+            className="hidden text-xs text-zinc-400 dark:text-zinc-500 sm:block"
           >
             A little about my approach
           </motion.span>
@@ -140,7 +140,7 @@ const About = () => {
           >
             <motion.p
               variants={fadeUp}
-              className="mb-6 text-sm font-medium tracking-wide text-zinc-500"
+              className="mb-6 text-sm font-medium tracking-wide text-zinc-500 dark:text-zinc-400"
             >
               More than just code.
             </motion.p>
@@ -152,10 +152,10 @@ const About = () => {
             >
               I build
               <br />
-              <span className="text-zinc-400">things that</span>
+              <span className="text-zinc-400 dark:text-zinc-500">things that</span>
               <br />
               <span>
-                matter<span className="text-violet-700">.</span>
+                matter<span className="text-amber-700 dark:text-amber-400">.</span>
               </span>
             </motion.h2>
           </motion.div>
@@ -175,14 +175,14 @@ const About = () => {
                   ? undefined
                   : { y: -3, transition: { duration: 0.3 } }
               }
-              className="mb-6 flex size-12 items-center justify-center rounded-2xl border border-violet-100 bg-white/80 text-violet-700 shadow-sm"
+              className="mb-6 flex size-12 items-center justify-center rounded-2xl border border-amber-100 dark:border-amber-500/20 bg-white/80 dark:bg-zinc-900/80 text-amber-700 dark:text-amber-400 shadow-sm"
             >
               <FiCode size={23} />
             </motion.div>
 
             <motion.p
               variants={fadeUp}
-              className="max-w-xl text-lg font-medium leading-8 tracking-tight text-zinc-800 sm:text-xl sm:leading-9"
+              className="max-w-xl text-lg font-medium leading-8 tracking-tight text-zinc-800 dark:text-zinc-200 sm:text-xl sm:leading-9"
             >
               I&apos;m a Full Stack Developer focused on creating
               reliable applications with clean architecture and
@@ -191,7 +191,7 @@ const About = () => {
 
             <motion.p
               variants={fadeUp}
-              className="mt-5 max-w-xl text-sm leading-7 text-zinc-500 sm:text-base sm:leading-8"
+              className="mt-5 max-w-xl text-sm leading-7 text-zinc-500 dark:text-zinc-400 sm:text-base sm:leading-8"
             >
               I enjoy working across the stack — from building intuitive
               interfaces with React and Next.js to developing APIs and
@@ -202,11 +202,11 @@ const About = () => {
             <motion.div variants={fadeUp} className="mt-8 w-fit">
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-white/70 py-3 pl-5 pr-3 text-sm font-semibold text-zinc-800 transition-all duration-300 hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
+                className="group inline-flex items-center gap-3 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/70 py-3 pl-5 pr-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 transition-all duration-300 hover:border-amber-300 dark:hover:border-amber-500/30 hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-400"
               >
                 See what I build
 
-                <span className="flex size-8 items-center justify-center rounded-full bg-zinc-100 transition-colors group-hover:bg-violet-100">
+                <span className="flex size-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 transition-colors group-hover:bg-amber-100 dark:group-hover:bg-amber-500/15">
                   <FiArrowUpRight
                     size={17}
                     className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -218,7 +218,7 @@ const About = () => {
         </div>
 
         {/* Minimal details */}
-        <div className="mt-20 grid gap-10 border-y border-zinc-200/80 py-8 sm:mt-24 sm:grid-cols-2 sm:items-center lg:mt-28 lg:grid-cols-[0.7fr_1.3fr] lg:py-10">
+        <div className="mt-20 grid gap-10 border-y border-zinc-200/80 dark:border-zinc-800/80 py-8 sm:mt-24 sm:grid-cols-2 sm:items-center lg:mt-28 lg:grid-cols-[0.7fr_1.3fr] lg:py-10">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -227,14 +227,14 @@ const About = () => {
           >
             <motion.p
               variants={fadeUp}
-              className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400"
+              className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500"
             >
               My approach
             </motion.p>
 
             <motion.p
               variants={fadeUp}
-              className="mt-3 text-xl font-medium tracking-tight text-zinc-800 sm:text-2xl"
+              className="mt-3 text-xl font-medium tracking-tight text-zinc-800 dark:text-zinc-200 sm:text-2xl"
             >
               Think clearly. Build thoughtfully.
             </motion.p>
@@ -251,15 +251,16 @@ const About = () => {
               variants={fadeUp}
               className="flex items-center gap-3"
             >
-              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-violet-100 bg-white/80 text-violet-700">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-amber-100 dark:border-amber-500/20 bg-white/80 dark:bg-zinc-900/80 text-amber-700 dark:text-amber-400">
                 <FiLayers size={19} />
               </span>
 
               <div>
-                <p className="text-sm font-semibold text-zinc-800">
+                <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
                   Technologies I work with
                 </p>
-                <p className="mt-1 text-xs text-zinc-400">
+
+                <p className="mt-1 text-xs text-zinc-400 dark:text-zinc-500">
                   My development toolkit
                 </p>
               </div>
@@ -284,7 +285,7 @@ const About = () => {
                           transition: { duration: 0.2 },
                         }
                   }
-                  className="rounded-full border border-zinc-200/90 bg-white/70 px-3.5 py-2 text-xs font-medium text-zinc-600 transition-colors duration-300 hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
+                  className="rounded-full border border-zinc-200/90 dark:border-zinc-800/90 bg-white/70 dark:bg-zinc-900/70 px-3.5 py-2 text-xs font-medium text-zinc-600 dark:text-zinc-400 transition-colors duration-300 hover:border-amber-300 dark:hover:border-amber-500/30 hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-400"
                 >
                   {technology}
                 </motion.span>
@@ -303,7 +304,7 @@ const About = () => {
         >
           <motion.span
             variants={fadeUp}
-            className="text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-400"
+            className="text-[10px] font-medium uppercase tracking-[0.18em] text-zinc-400 dark:text-zinc-500"
           >
             Curiosity into creation
           </motion.span>
@@ -312,7 +313,7 @@ const About = () => {
             <Link
               href="/experience"
               aria-label="Continue to experience section"
-              className="group flex size-10 items-center justify-center rounded-full border border-zinc-200 bg-white/70 text-zinc-600 transition-all duration-300 hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
+              className="group flex size-10 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/70 text-zinc-600 dark:text-zinc-400 transition-all duration-300 hover:border-amber-300 dark:hover:border-amber-500/30 hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-400"
             >
               <FiArrowDownRight
                 size={19}

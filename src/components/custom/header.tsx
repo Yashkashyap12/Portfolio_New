@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
+import ThemeToggle from "./theme-toggle";
 import { FaCode } from "react-icons/fa";
 import {
   FiArrowUpRight,
@@ -10,80 +14,79 @@ import {
   FiX,
 } from "react-icons/fi";
 
-type NavLink = {
-  name: string;
-  href: string;
-};
-
-const navLinks: NavLink[] = [
+const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
+  { name: "Experience", href: "/experience" },
   { name: "Projects", href: "/projects" },
   { name: "Contacts", href: "/contact" },
 ];
 
-const Header = () => {
-  const [activeLink, setActiveLink] = useState("/");
+export default function Header() {
+  const pathname = usePathname();
+  const shouldReduceMotion = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
+
+  const closeMenu = () => setMobileOpen(false);
 
   return (
     <>
-      {/* Desktop Vertical Navigation */}
-      <header className="fixed left-0 top-0 z-50 hidden h-screen w-25 flex-col items-center border-r border-zinc-200/80 bg-white/90 py-7 backdrop-blur-xl lg:flex xl:w-28">
-        {/* Brand */}
-        <Link
-          href="/"
-          aria-label="Go to homepage"
-          onClick={() => setActiveLink("/")}
-          className="group flex flex-col items-center gap-2"
-        >
-          <span className="flex h-11 w-11 items-center justify-center rounded-full bg-zinc-950 text-white transition-all duration-300 group-hover:rotate-12 group-hover:bg-amber-600">
+      {/* Desktop sidebar */}
+      <header className="fixed left-0 top-0 z-50 hidden h-dvh w-25 flex-col items-center border-r border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-900/95 py-7 backdrop-blur-xl lg:flex xl:w-28">
+        <Link href="/" aria-label="Homepage" className="group flex flex-col items-center gap-2">
+          <motion.span
+            whileHover={shouldReduceMotion ? undefined : { rotate: 12, scale: 1.06 }}
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-zinc-950 dark:bg-amber-600 text-white transition-colors group-hover:bg-amber-600"
+          >
             <FaCode size={20} />
-          </span>
-
-          <span className="text-[11px] font-bold tracking-tight text-zinc-950">
+          </motion.span>
+          <span className="text-[11px] font-bold text-zinc-950 dark:text-white">
             YASH KASHYAP<span className="text-amber-600">.</span>
           </span>
         </Link>
 
-        {/* Vertical Divider */}
-        <div className="my-6 h-px w-8 bg-zinc-200" />
+        <div className="my-6 h-px w-8 bg-zinc-200 dark:bg-zinc-700" />
 
-        {/* Navigation Links */}
-        <nav
-          aria-label="Main navigation"
-          className="flex flex-1 flex-col items-center gap-5"
-        >
+        <nav aria-label="Main navigation" className="flex flex-1 flex-col items-center gap-5">
           {navLinks.map((link) => {
-            const isActive = activeLink === link.href;
+            const active =
+              pathname === link.href ||
+              (link.href !== "/" && pathname.startsWith(`${link.href}/`));
 
             return (
               <Link
-                key={link.name}
+                key={link.href}
                 href={link.href}
-                onClick={() => setActiveLink(link.href)}
-                aria-current={isActive ? "page" : undefined}
-                className="group relative flex flex-col items-center gap-2 py-1"
+                aria-current={active ? "page" : undefined}
+                className={`group flex flex-col items-center gap-2 py-1 ${
+                  active ? "text-zinc-950 dark:text-white" : "text-zinc-400 dark:text-zinc-500 hover:text-amber-700 dark:hover:text-amber-400"
+                }`}
               >
                 <span
-                  className={`text-[15px] font-medium tracking-wide transition-colors duration-300 ${
-                    isActive
-                      ? "text-zinc-950"
-                      : "text-zinc-400 group-hover:text-zinc-900"
-                  }`}
-                  style={{
-                    writingMode: "vertical-rl",
-                    transform: "rotate(180deg)",
-                  }}
+                  className="text-[15px] font-medium"
+                  style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
                 >
                   {link.name}
                 </span>
-
-                <span
-                  className={`h-1.5 w-1.5 rounded-full transition-all duration-300 ${
-                    isActive
-                      ? "scale-100 bg-amber-600"
-                      : "scale-75 bg-zinc-300 group-hover:scale-100 group-hover:bg-amber-500"
+                <motion.span
+                  animate={{ scale: active ? 1 : 0.65, opacity: active ? 1 : 0.5 }}
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    active ? "bg-amber-600" : "bg-zinc-300 dark:bg-zinc-600"
                   }`}
                 />
               </Link>
@@ -91,110 +94,129 @@ const Header = () => {
           })}
         </nav>
 
-        {/* Bottom CTA */}
-        <Link
-          href="/contact"
-          onClick={() => setActiveLink("/contact")}
-          className="group flex flex-col items-center gap-3"
-          aria-label="Contact me"
-        >
+        <ThemeToggle className="mb-6" />
+
+        <Link href="/contact" className="flex flex-col items-center gap-3">
           <span
-            className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 transition-colors group-hover:text-amber-600"
+            className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400"
             style={{ writingMode: "vertical-rl" }}
           >
-            Let's Talk
+            Let&apos;s Talk
           </span>
-
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-200 bg-white transition-all duration-300 group-hover:border-amber-600 group-hover:bg-amber-600 group-hover:text-white">
-            <FiArrowUpRight
-              size={19}
-              className="transition-transform duration-300 group-hover:rotate-45"
-            />
+          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 transition-colors hover:border-amber-600 hover:bg-amber-600 hover:text-white">
+            <FiArrowUpRight size={19} />
           </span>
         </Link>
-
-        {/* Availability Indicator */}
-        <div className="mt-8 flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-          <span className="text-[8px] uppercase tracking-wider text-zinc-400">
-            Available
-          </span>
-        </div>
       </header>
 
-      {/* Mobile Navigation */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-200/80 bg-white/90 backdrop-blur-xl lg:hidden">
-        <nav className="flex h-[76px] items-center justify-between px-5 sm:px-8">
-          <Link
-            href="/"
-            onClick={() => {
-              setActiveLink("/");
-              setMobileOpen(false);
-            }}
-            className="flex items-center gap-3"
-          >
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-950 text-white transition-colors hover:bg-amber-600">
+      {/* Mobile header */}
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl lg:hidden">
+        <nav className="flex h-19 items-center justify-between px-5 sm:px-8">
+          <Link href="/" onClick={closeMenu} className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-950 dark:bg-amber-600 text-white">
               <FiCommand size={19} />
             </span>
-
-            <span className="text-sm font-bold tracking-tight text-zinc-950">
+            <span className="text-sm font-bold text-zinc-950 dark:text-white">
               YASH KASHYAP<span className="text-amber-600">.</span>
-
-              <span className="mt-0.5 block text-[9px] font-medium uppercase tracking-[0.18em] text-zinc-400">
-                Developer & Creator
+              <span className="mt-0.5 block text-[9px] font-medium uppercase tracking-[0.18em] text-zinc-400 dark:text-zinc-500">
+                Developer &amp; Creator
               </span>
             </span>
           </Link>
 
-          <button
+          <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <motion.button
             type="button"
+            whileTap={shouldReduceMotion ? undefined : { scale: 0.9 }}
             onClick={() => setMobileOpen((open) => !open)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-200 text-zinc-900 transition-colors hover:border-amber-600 hover:text-amber-600"
+            aria-controls="mobile-navigation"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 hover:border-amber-600 hover:text-amber-700 dark:hover:text-amber-400"
           >
-            {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}
-          </button>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={mobileOpen ? "close" : "open"}
+                initial={shouldReduceMotion ? false : { opacity: 0, rotate: -45, scale: 0.8 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={shouldReduceMotion ? undefined : { opacity: 0, rotate: 45, scale: 0.8 }}
+                transition={{ duration: 0.15 }}
+              >
+                {mobileOpen ? <FiX size={21} /> : <FiMenu size={21} />}
+              </motion.span>
+            </AnimatePresence>
+          </motion.button>
+          </div>
         </nav>
 
-        {/* Mobile Menu */}
-        {mobileOpen && (
-          <div className="border-t border-zinc-200 bg-white px-5 pb-6 pt-4 sm:px-8">
-            <nav
-              aria-label="Mobile navigation"
-              className="flex flex-col"
+        <AnimatePresence initial={false}>
+          {mobileOpen && (
+            <motion.div
+              id="mobile-navigation"
+              key="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.28, ease: "easeOut" }}
+              className="max-h-[calc(100dvh-4.75rem)] overflow-y-auto border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900"
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => {
-                    setActiveLink(link.href);
-                    setMobileOpen(false);
-                  }}
-                  className="flex items-center justify-between border-b border-zinc-100 py-4 text-sm font-medium text-zinc-600 transition-colors hover:text-amber-600"
-                >
-                  <span>{link.name}</span>
-                </Link>
-              ))}
-
-              <Link
-                href="/contact"
-                onClick={() => {
-                  setActiveLink("/contact");
-                  setMobileOpen(false);
-                }}
-                className="mt-5 flex items-center justify-between rounded-full bg-zinc-950 px-5 py-3.5 text-sm font-medium text-white transition-colors hover:bg-amber-700"
+              <motion.nav
+                aria-label="Mobile navigation"
+                className="flex flex-col px-5 pb-6 pt-2 sm:px-8"
               >
-                Let's Talk
-                <FiArrowUpRight size={18} />
-              </Link>
-            </nav>
-          </div>
-        )}
+                {navLinks.map((link, index) => {
+                  const active =
+                    pathname === link.href ||
+                    (link.href !== "/" && pathname.startsWith(`${link.href}/`));
+
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.25, delay: 0.08 + index * 0.06 }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={closeMenu}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 py-4 text-sm font-medium ${
+                          active ? "text-amber-700 dark:text-amber-400" : "text-zinc-600 dark:text-zinc-400 hover:text-amber-700 dark:hover:text-amber-400"
+                        }`}
+                      >
+                        <span>{link.name}</span>
+                        <span className="flex items-center gap-3">
+                          <span className="text-xs text-zinc-300 dark:text-zinc-600">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <FiArrowUpRight size={16} />
+                        </span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+
+                <motion.div
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.25, delay: 0.08 + navLinks.length * 0.06 }}
+                  className="pt-5"
+                >
+                  <Link
+                    href="/contact"
+                    onClick={closeMenu}
+                    className="flex items-center justify-between rounded-full bg-zinc-950 dark:bg-amber-600 px-5 py-3.5 text-sm font-medium text-white transition-colors hover:bg-amber-700"
+                  >
+                    Let&apos;s Talk
+                    <FiArrowUpRight size={18} />
+                  </Link>
+                </motion.div>
+              </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
     </>
   );
-};
-
-export default Header;
+}

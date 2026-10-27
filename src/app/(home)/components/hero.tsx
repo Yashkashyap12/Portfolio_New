@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import {
   FiArrowDownRight,
   FiArrowUpRight,
@@ -69,17 +70,15 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative isolate min-h-screen overflow-hidden bg-[#faf9f6] text-[#171717]"
+      className="relative isolate min-h-screen overflow-hidden bg-[#faf9f6] dark:bg-[#0b0b0c] text-[#171717] dark:text-zinc-100"
     >
       {/* Background effects */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <motion.div
           aria-hidden="true"
-          className="absolute -right-40 -top-20 h-125 w-125 rounded-full bg-amber-100/30 blur-[110px]"
+          className="absolute -right-40 -top-20 h-125 w-125 rounded-full bg-amber-100/30 dark:bg-amber-500/10 blur-[110px]"
           animate={
-            shouldReduceMotion
-              ? undefined
-              : { x: [0, -20, 0], y: [0, 25, 0] }
+            shouldReduceMotion ? undefined : { x: [0, -20, 0], y: [0, 25, 0] }
           }
           transition={{
             duration: 12,
@@ -90,11 +89,9 @@ const Hero = () => {
 
         <motion.div
           aria-hidden="true"
-          className="absolute -left-40 bottom-0 h-87.5 w-87.5 rounded-full bg-orange-100/40 blur-[100px]"
+          className="absolute -left-40 bottom-0 h-87.5 w-87.5 rounded-full bg-orange-100/40 dark:bg-amber-500/10 blur-[100px]"
           animate={
-            shouldReduceMotion
-              ? undefined
-              : { x: [0, 20, 0], y: [0, -15, 0] }
+            shouldReduceMotion ? undefined : { x: [0, 20, 0], y: [0, -15, 0] }
           }
           transition={{
             duration: 10,
@@ -114,7 +111,7 @@ const Hero = () => {
         />
       </div>
 
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pt-32 sm:px-10 lg:px-12 lg:pt-12">
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pt-32 sm:px-10 lg:px-12 lg:pt-12 lg:pb-12">
         <div className="grid flex-1 items-center gap-14 pb-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
           {/* Left content */}
           <motion.div
@@ -126,7 +123,7 @@ const Hero = () => {
             {/* Availability */}
             <motion.div
               variants={fadeUp}
-              className="mb-8 inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-white/80 px-4 py-2.5 shadow-sm"
+              className="mb-8 inline-flex items-center gap-3 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 px-4 py-2.5 shadow-sm"
             >
               <span className="relative flex h-2 w-2">
                 {!shouldReduceMotion && (
@@ -135,7 +132,7 @@ const Hero = () => {
                 <span className="relative h-2 w-2 rounded-full bg-emerald-500" />
               </span>
 
-              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-600">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-zinc-600 dark:text-zinc-400">
                 Open to opportunities
               </span>
             </motion.div>
@@ -143,7 +140,7 @@ const Hero = () => {
             {/* Introduction */}
             <motion.p
               variants={fadeUp}
-              className="mb-5 text-sm font-medium tracking-wide text-zinc-500"
+              className="mb-5 text-sm font-medium tracking-wide text-zinc-500 dark:text-zinc-400"
             >
               Hello, I&apos;m
             </motion.p>
@@ -153,15 +150,15 @@ const Hero = () => {
               variants={fadeUp}
               className="max-w-4xl text-[clamp(3.2rem,6.5vw,6rem)] font-semibold leading-[0.92] tracking-[-0.065em]"
             >
-              <span className="block whitespace-nowrap text-zinc-950">
+              <span className="block whitespace-nowrap text-zinc-950 dark:text-white">
                 YASH
               </span>
 
-              <span className="mt-2 block whitespace-nowrap text-zinc-500">
+              <span className="mt-2 block whitespace-nowrap text-zinc-500 dark:text-zinc-400">
                 KASHYAP<span className="text-amber-600">.</span>
               </span>
 
-              <span className="mt-5 block text-[0.32em] font-semibold leading-tight tracking-tight text-amber-700 sm:text-[0.35em]">
+              <span className="mt-5 block text-[0.32em] font-semibold leading-tight tracking-tight text-amber-700 dark:text-amber-400 sm:text-[0.35em]">
                 Full Stack Developer
               </span>
             </motion.h1>
@@ -169,11 +166,11 @@ const Hero = () => {
             {/* Description */}
             <motion.p
               variants={fadeUp}
-              className="mt-8 max-w-xl text-base leading-8 text-zinc-600 sm:text-lg"
+              className="mt-8 max-w-xl text-base leading-8 text-zinc-600 dark:text-zinc-400 sm:text-lg"
             >
-              I build scalable applications, thoughtful user experiences,
-              and reliable digital products that solve real-world problems.
-              Turning complex ideas into simple, effective solutions.
+              I build scalable applications, thoughtful user experiences, and
+              reliable digital products that solve real-world problems. Turning
+              complex ideas into simple, effective solutions.
             </motion.p>
 
             {/* CTA buttons */}
@@ -183,10 +180,9 @@ const Hero = () => {
             >
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-7 rounded-full hover:bg-amber-500 px-6 py-4 text-sm font-semibold text-white transition-all duration-300 bg-amber-700 hover:shadow-lg hover:shadow-amber-900/10"
+                className="group inline-flex items-center gap-7 rounded-full hover:bg-amber-500 px-6 py-4 text-sm font-semibold text-white transition-all duration-300 bg-amber-600 hover:shadow-lg hover:shadow-amber-900/10"
               >
                 Explore my work
-
                 <FiArrowUpRight
                   size={18}
                   className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -195,10 +191,9 @@ const Hero = () => {
 
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white/70 px-6 py-4 text-sm font-semibold text-zinc-800 transition-all duration-300 hover:border-amber-500 hover:bg-amber-50"
+                className="group inline-flex items-center gap-2 rounded-full border border-zinc-300 dark:border-zinc-700 bg-white/70 dark:bg-zinc-900/70 px-6 py-4 text-sm font-semibold text-zinc-800 dark:text-zinc-200 transition-all duration-300 hover:border-amber-500 hover:bg-amber-50 dark:hover:bg-amber-500/10"
               >
                 Let&apos;s connect
-
                 <FiArrowDownRight
                   size={17}
                   className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5"
@@ -211,18 +206,18 @@ const Hero = () => {
               variants={fadeUp}
               className="mt-12 flex items-center gap-5"
             >
-              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 dark:text-zinc-500">
                 Find me on
               </span>
 
-              <span className="h-px w-8 bg-zinc-300" />
+              <span className="h-px w-8 bg-zinc-300 dark:bg-zinc-600" />
 
               <Link
                 href="https://github.com/Yashkashyap12"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="text-zinc-500 transition-colors hover:text-amber-700"
+                className="text-zinc-500 dark:text-zinc-400 transition-colors hover:text-amber-700 dark:hover:text-amber-400"
               >
                 <FiGithub size={20} />
               </Link>
@@ -232,7 +227,7 @@ const Hero = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="text-zinc-500 transition-colors hover:text-amber-700"
+                className="text-zinc-500 dark:text-zinc-400 transition-colors hover:text-amber-700 dark:hover:text-amber-400"
               >
                 <FiLinkedin size={20} />
               </Link>
@@ -249,12 +244,8 @@ const Hero = () => {
             {/* Decorative frames */}
             <motion.div
               aria-hidden="true"
-              className="absolute inset-3 rotate-3 rounded-[2rem] border border-amber-200/80"
-              animate={
-                shouldReduceMotion
-                  ? undefined
-                  : { rotate: [3, 4.5, 3] }
-              }
+              className="absolute inset-3 rotate-3 rounded-[2rem] border border-amber-200/80 dark:border-amber-500/30"
+              animate={shouldReduceMotion ? undefined : { rotate: [3, 4.5, 3] }}
               transition={{
                 duration: 8,
                 repeat: Infinity,
@@ -264,11 +255,9 @@ const Hero = () => {
 
             <motion.div
               aria-hidden="true"
-              className="absolute inset-3 -rotate-3 rounded-[2rem] border border-zinc-200/80"
+              className="absolute inset-3 -rotate-3 rounded-[2rem] border border-zinc-200/80 dark:border-zinc-800/80"
               animate={
-                shouldReduceMotion
-                  ? undefined
-                  : { rotate: [-3, -4.5, -3] }
+                shouldReduceMotion ? undefined : { rotate: [-3, -4.5, -3] }
               }
               transition={{
                 duration: 9,
@@ -284,40 +273,36 @@ const Hero = () => {
                   ? undefined
                   : { y: -5, transition: { duration: 0.3 } }
               }
-              className="relative overflow-hidden rounded-[1.75rem] border border-zinc-200/80 bg-white shadow-[0_25px_80px_-35px_rgba(39,39,42,0.18)]"
+              className="relative overflow-hidden rounded-[1.75rem] border border-zinc-200/80 dark:border-zinc-800/80 bg-white dark:bg-zinc-900 shadow-[0_25px_80px_-35px_rgba(39,39,42,0.18)]"
             >
               {/* Card header */}
-              <div className="flex items-center justify-between border-b border-zinc-100 px-6 py-5">
+              <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 px-6 py-5">
                 <div>
-                  <p className="text-xs font-semibold text-zinc-900">
+                  <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">
                     Developer profile
                   </p>
 
-                  <p className="mt-1 text-[11px] text-zinc-400">
+                  <p className="mt-1 text-[11px] text-zinc-400 dark:text-zinc-500">
                     Building with intention
                   </p>
                 </div>
 
                 <motion.div
                   whileHover={
-                    shouldReduceMotion
-                      ? undefined
-                      : { rotate: 12, scale: 1.05 }
+                    shouldReduceMotion ? undefined : { rotate: 12, scale: 1.05 }
                   }
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-700"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400"
                 >
                   <FiLayers size={21} />
                 </motion.div>
               </div>
 
               {/* Abstract illustration */}
-              <div className="relative flex h-70 items-center justify-center overflow-hidden bg-linear-to-br from-[#fffbeb] via-white to-[#fff7ed] sm:h-80">
+              <div className="relative flex h-70 items-center justify-center overflow-hidden bg-linear-to-br from-[#fffbeb] dark:from-amber-950/40 via-white dark:via-zinc-900 to-[#fff7ed] dark:to-orange-950/30 sm:h-80">
                 <motion.div
                   aria-hidden="true"
-                  className="absolute h-61.25 w-61.25 rounded-full border border-amber-200/80"
-                  animate={
-                    shouldReduceMotion ? undefined : { rotate: 360 }
-                  }
+                  className="absolute h-61.25 w-61.25 rounded-full border border-amber-200/80 dark:border-amber-500/30"
+                  animate={shouldReduceMotion ? undefined : { rotate: 360 }}
                   transition={{
                     duration: 40,
                     repeat: Infinity,
@@ -327,10 +312,8 @@ const Hero = () => {
 
                 <motion.div
                   aria-hidden="true"
-                  className="absolute h-50 w-50 rounded-full border border-dashed border-amber-300/80"
-                  animate={
-                    shouldReduceMotion ? undefined : { rotate: -360 }
-                  }
+                  className="absolute h-50 w-50 rounded-full border border-dashed border-amber-300/80 dark:border-amber-500/30"
+                  animate={shouldReduceMotion ? undefined : { rotate: -360 }}
                   transition={{
                     duration: 55,
                     repeat: Infinity,
@@ -339,7 +322,7 @@ const Hero = () => {
                 />
 
                 <motion.div
-                  className="absolute h-40 w-40 -rotate-12 rounded-[40px] border border-white bg-linear-to-br from-amber-500 via-amber-600 to-orange-700 shadow-[0_25px_60px_-20px_rgba(217,119,6,0.45)]"
+                  className="absolute h-40 w-40 -rotate-12 rounded-[40px] border border-white dark:border-white/10 bg-linear-to-br from-amber-500 via-amber-600 to-orange-700 shadow-[0_25px_60px_-20px_rgba(217,119,6,0.45)]"
                   animate={
                     shouldReduceMotion
                       ? undefined
@@ -384,13 +367,13 @@ const Hero = () => {
                     duration: 0.6,
                     delay: shouldReduceMotion ? 0 : 0.8,
                   }}
-                  className="absolute left-6 top-6 rounded-xl border border-zinc-200/80 bg-white/90 px-3 py-2.5 shadow-sm"
+                  className="absolute left-6 top-6 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/90 dark:bg-zinc-900/90 px-3 py-2.5 shadow-sm"
                 >
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-zinc-400">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500">
                     Focus
                   </p>
 
-                  <p className="mt-1 text-xs font-semibold text-zinc-800">
+                  <p className="mt-1 text-xs font-semibold text-zinc-800 dark:text-zinc-200">
                     Full-stack development
                   </p>
                 </motion.div>
@@ -406,32 +389,32 @@ const Hero = () => {
                     duration: 0.6,
                     delay: shouldReduceMotion ? 0 : 1,
                   }}
-                  className="absolute bottom-6 right-6 rounded-xl border border-zinc-200/80 bg-white/95 px-3 py-2.5 shadow-sm"
+                  className="absolute bottom-6 right-6 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/95 dark:bg-zinc-900/95 px-3 py-2.5 shadow-sm"
                 >
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-zinc-400">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-500">
                     Philosophy
                   </p>
 
-                  <p className="mt-1 text-xs font-semibold text-amber-700">
+                  <p className="mt-1 text-xs font-semibold text-amber-700 dark:text-amber-400">
                     Build better.
                   </p>
                 </motion.div>
               </div>
 
               {/* Card footer */}
-              <div className="flex items-center justify-between gap-4 border-t border-zinc-100 px-6 py-5">
+              <div className="flex items-center justify-between gap-4 border-t border-zinc-100 dark:border-zinc-800 px-6 py-5">
                 <div>
-                  <p className="text-sm font-semibold text-zinc-900">
+                  <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
                     Yash Kashyap
                   </p>
 
-                  <p className="mt-1 text-xs text-zinc-500">
+                  <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
                     Developer &amp; problem solver
                   </p>
                 </div>
 
-                <span className="rounded-full bg-amber-100 px-3 py-3 text-[10px] font-semibold text-emerald-700">
-                  <FaCode className="size-4"/>
+                <span className="rounded-full bg-amber-100 dark:bg-amber-500/15 px-3 py-3 text-[10px] font-semibold text-emerald-700 dark:text-emerald-400">
+                  <FaCode className="size-4" />
                 </span>
               </div>
             </motion.div>
@@ -439,9 +422,9 @@ const Hero = () => {
         </div>
 
         {/* Technology strip */}
-        <div className="border-t border-zinc-200 py-7">
+        <div className="border-t border-zinc-200 dark:border-zinc-800 py-7">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-            <p className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400">
+            <p className="shrink-0 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">
               Technologies I use
             </p>
 
@@ -450,13 +433,13 @@ const Hero = () => {
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: true, amount: 0.1 }}
             >
               {technologies.map((technology) => (
                 <motion.span
                   key={technology}
                   variants={fadeUp}
-                  className="text-xs font-semibold tracking-wide text-zinc-500 transition-colors hover:text-amber-700 sm:text-sm"
+                  className="text-xs font-semibold tracking-wide text-zinc-500 dark:text-zinc-400 transition-colors hover:text-amber-700 dark:hover:text-amber-400 sm:text-sm"
                 >
                   {technology}
                 </motion.span>

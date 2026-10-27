@@ -1,10 +1,10 @@
-import About from "../about/page"
-import Contact from "../contact/page"
-import Experience from "../experience/page"
-import Projects from "../projects/page"
-import Hero from "./components/hero"
+import About from "../about/page";
+import Contact from "../contact/page";
+import Experience from "../experience/page";
+import Projects from "../projects/page";
+import Hero from "./components/hero";
 
-const Home = () => {
+export default function Home() {
   return (
     <div>
       <Hero />
@@ -13,7 +13,5 @@ const Home = () => {
       <Projects />
       <Contact />
     </div>
-  )
+  );
 }
-
-export default Home

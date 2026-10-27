@@ -1,11 +1,10 @@
-
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/lib/use-reduced-motion";
 import {
   FiArrowDownRight,
-  FiArrowUpRight,
   FiBriefcase,
 } from "react-icons/fi";
 
@@ -74,8 +73,8 @@ const Experience = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.25,
-        delayChildren: shouldReduceMotion ? 0 : 0.2,
+        staggerChildren: shouldReduceMotion ? 0 : 0.12,
+        delayChildren: shouldReduceMotion ? 0 : 0.1,
       },
     },
   };
@@ -97,14 +96,14 @@ const Experience = () => {
 
   const viewport = {
     once: true,
-    amount: 0.15,
+    amount: 0.1,
   };
 
   return (
     <section
       id="experience"
       aria-labelledby="experience-heading"
-      className="relative isolate overflow-hidden bg-[#faf9f6] text-[#171717]"
+      className="relative isolate overflow-hidden bg-[#faf9f6] dark:bg-[#0b0b0c] text-[#171717] dark:text-zinc-100"
     >
       {/* Background effects */}
       <div
@@ -112,7 +111,7 @@ const Experience = () => {
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
       >
         <motion.div
-          className="absolute -right-40 top-20 h-96 w-96 rounded-full bg-violet-200/30 blur-[110px]"
+          className="absolute -right-40 top-20 h-96 w-96 rounded-full bg-amber-100/30 dark:bg-amber-500/10 blur-[110px]"
           animate={
             shouldReduceMotion
               ? undefined
@@ -126,7 +125,7 @@ const Experience = () => {
         />
 
         <motion.div
-          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-indigo-100/35 blur-[110px]"
+          className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-orange-100/35 dark:bg-amber-500/10 blur-[110px]"
           animate={
             shouldReduceMotion
               ? undefined
@@ -149,7 +148,7 @@ const Experience = () => {
         />
       </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-28 lg:px-12 lg:py-18">
+      <div className="mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-28 lg:px-12 lg:py-24">
         {/* Section label */}
         <motion.div
           variants={staggerContainer}
@@ -162,16 +161,16 @@ const Experience = () => {
             variants={fadeUp}
             className="flex items-center gap-3"
           >
-            <span className="h-px w-8 bg-violet-600 sm:w-12" />
+            <span className="h-px w-8 bg-amber-600 sm:w-12" />
 
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 sm:text-xs">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 sm:text-xs">
               02 / Experience
             </span>
           </motion.div>
 
           <motion.span
             variants={fadeUp}
-            className="hidden text-xs text-zinc-400 sm:block"
+            className="hidden text-xs text-zinc-400 dark:text-zinc-500 sm:block"
           >
             My development journey
           </motion.span>
@@ -187,7 +186,7 @@ const Experience = () => {
           >
             <motion.p
               variants={fadeUp}
-              className="mb-6 text-sm font-medium tracking-wide text-zinc-500"
+              className="mb-6 text-sm font-medium tracking-wide text-zinc-500 dark:text-zinc-400"
             >
               Learning. Building. Improving.
             </motion.p>
@@ -199,10 +198,10 @@ const Experience = () => {
             >
               The work
               <br />
-              <span className="text-zinc-400">behind the</span>
+              <span className="text-zinc-400 dark:text-zinc-500">behind the</span>
               <br />
               <span>
-                progress<span className="text-violet-700">.</span>
+                progress<span className="text-amber-700 dark:text-amber-400">.</span>
               </span>
             </motion.h2>
           </motion.div>
@@ -216,7 +215,7 @@ const Experience = () => {
           >
             <motion.p
               variants={fadeUp}
-              className="text-base leading-8 text-zinc-600 sm:text-lg sm:leading-9"
+              className="text-base leading-8 text-zinc-600 dark:text-zinc-400 sm:text-lg sm:leading-9"
             >
               Every project is an opportunity to strengthen my engineering
               skills, understand real-world problems, and build better
@@ -227,11 +226,11 @@ const Experience = () => {
               variants={fadeUp}
               className="mt-6 flex items-center gap-3"
             >
-              <span className="flex size-10 items-center justify-center rounded-xl border border-violet-100 bg-white/80 text-violet-700 shadow-sm">
+              <span className="flex size-10 items-center justify-center rounded-xl border border-amber-100 dark:border-amber-500/20 bg-white/80 dark:bg-zinc-900/80 text-amber-700 dark:text-amber-400 shadow-sm">
                 <FiBriefcase size={19} />
               </span>
 
-              <span className="text-xs font-medium text-zinc-500">
+              <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
                 Development experience &amp; selected work
               </span>
             </motion.div>
@@ -244,18 +243,18 @@ const Experience = () => {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="mt-20 flex items-center justify-between border-y border-zinc-200/80 py-5 sm:mt-24 lg:mt-28"
+          className="mt-20 flex items-center justify-between border-y border-zinc-200/80 dark:border-zinc-800/80 py-5 sm:mt-24 lg:mt-28"
         >
           <motion.span
             variants={fadeUp}
-            className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400"
+            className="text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500"
           >
             Selected experience
           </motion.span>
 
           <motion.span
             variants={fadeUp}
-            className="text-xs text-zinc-400"
+            className="text-xs text-zinc-400 dark:text-zinc-500"
           >
             01 — 03
           </motion.span>
@@ -281,32 +280,32 @@ const Experience = () => {
                       transition: { duration: 0.3 },
                     }
               }
-              className="group grid gap-5 border-b border-zinc-200/80 py-8 transition-colors duration-300 sm:py-10 lg:grid-cols-[100px_1fr_0.85fr] lg:gap-8 lg:py-12"
+              className="group grid gap-5 border-b border-zinc-200/80 dark:border-zinc-800/80 py-8 transition-colors duration-300 sm:py-10 lg:grid-cols-[100px_1fr_0.85fr] lg:gap-8 lg:py-12"
             >
               {/* Number and timeline marker */}
               <div className="flex items-center gap-3 lg:flex-col lg:items-start lg:gap-5">
-                <span className="text-xs font-medium text-violet-700">
+                <span className="text-xs font-medium text-amber-700 dark:text-amber-400">
                   {item.number}
                 </span>
 
-                <span className="h-px w-8 bg-zinc-300 transition-colors group-hover:bg-violet-500 lg:w-10" />
+                <span className="h-px w-8 bg-zinc-300 dark:bg-zinc-600 transition-colors group-hover:bg-amber-500 lg:w-10" />
 
-                <span className="text-[10px] font-medium uppercase tracking-wider text-zinc-400 lg:mt-auto">
+                <span className="text-[10px] font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-500 lg:mt-auto">
                   {item.duration}
                 </span>
               </div>
 
               {/* Role and organization */}
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-zinc-400 dark:text-zinc-500">
                   {item.type}
                 </p>
 
-                <h3 className="mt-3 text-2xl font-semibold tracking-[-0.045em] text-zinc-900 transition-colors group-hover:text-violet-700 sm:text-3xl">
+                <h3 className="mt-3 text-2xl font-semibold tracking-[-0.045em] text-zinc-900 dark:text-zinc-100 transition-colors group-hover:text-amber-700 dark:group-hover:text-amber-400 sm:text-3xl">
                   {item.role}
                 </h3>
 
-                <p className="mt-2 text-sm font-medium text-zinc-500">
+                <p className="mt-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
                   {item.company}
                 </p>
 
@@ -314,7 +313,7 @@ const Experience = () => {
                   {item.technologies.map((technology) => (
                     <span
                       key={technology}
-                      className="rounded-full border border-zinc-200 bg-white/70 px-3 py-1.5 text-[11px] font-medium text-zinc-500"
+                      className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/70 px-3 py-1.5 text-[11px] font-medium text-zinc-500 dark:text-zinc-400"
                     >
                       {technology}
                     </span>
@@ -324,7 +323,7 @@ const Experience = () => {
 
               {/* Description and technologies */}
               <div className="lg:pt-1">
-                <p className="max-w-lg text-sm leading-7 text-zinc-500 sm:text-base sm:leading-8">
+                <p className="max-w-lg text-sm leading-7 text-zinc-500 dark:text-zinc-400 sm:text-base sm:leading-8">
                   {item.description}
                 </p>
 
@@ -340,7 +339,7 @@ const Experience = () => {
                               transition: { duration: 0.2 },
                             }
                       }
-                      className="rounded-full border border-zinc-200/90 bg-white/70 px-3 py-2 text-[11px] font-medium text-zinc-600 transition-colors group-hover:border-violet-200"
+                      className="rounded-full border border-zinc-200/90 dark:border-zinc-800/90 bg-white/70 dark:bg-zinc-900/70 px-3 py-2 text-[11px] font-medium text-zinc-600 dark:text-zinc-400 transition-colors group-hover:border-amber-200 dark:group-hover:border-amber-500/30"
                     >
                       {technology}
                     </motion.span>
@@ -361,7 +360,7 @@ const Experience = () => {
         >
           <motion.p
             variants={fadeUp}
-            className="max-w-md text-xs leading-6 text-zinc-400"
+            className="max-w-md text-xs leading-6 text-zinc-400 dark:text-zinc-500"
           >
             Focused on writing maintainable code, learning through practice,
             and improving with every build.
@@ -370,11 +369,11 @@ const Experience = () => {
           <motion.div variants={fadeUp}>
             <Link
               href="/projects"
-              className="group inline-flex items-center gap-3 rounded-full border border-zinc-200 bg-white/70 py-3 pl-5 pr-3 text-sm font-semibold text-zinc-800 transition-all duration-300 hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
+              className="group inline-flex items-center gap-3 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/70 py-3 pl-5 pr-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 transition-all duration-300 hover:border-amber-300 dark:hover:border-amber-500/30 hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-700 dark:hover:text-amber-400"
             >
               Explore projects
 
-              <span className="flex size-8 items-center justify-center rounded-full bg-zinc-100 transition-colors group-hover:bg-violet-100">
+              <span className="flex size-8 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 transition-colors group-hover:bg-amber-100 dark:group-hover:bg-amber-500/15">
                 <FiArrowDownRight
                   size={17}
                   className="transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5"

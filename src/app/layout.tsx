@@ -16,21 +16,35 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Portfolio By Yash",
-  description: "A personal portfolio showcasing my projects, skills, experience, and journey as a developer."
+  description:
+    "A personal portfolio showcasing my projects, skills, experience, and journey as a developer.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <main>
-          <Header />
-          {children}
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var t=localStorage.getItem("theme");if(t==="dark"||(!t&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark")}}catch(e){}`,
+          }}
+        />
+      </head>
+      <body className="min-h-screen flex flex-col">
+        <Header />
+        {/* Offset for the fixed desktop sidebar (w-25 / xl:w-28) and the mobile header (h-19 is handled per-section) */}
+        <div className="flex min-h-screen flex-1 flex-col overflow-x-clip lg:pl-25 xl:pl-28">
+          <main className="w-full flex-1">{children}</main>
           <Footer />
-          </main>
+        </div>
       </body>
     </html>
   );
