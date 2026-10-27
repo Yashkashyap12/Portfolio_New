@@ -13,6 +13,8 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
+import Image from "next/image";
+import DP from "../../assets/dp.png"
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -53,7 +55,8 @@ export default function Header() {
             whileHover={shouldReduceMotion ? undefined : { rotate: 12, scale: 1.06 }}
             className="flex h-11 w-11 items-center justify-center rounded-full bg-zinc-950 dark:bg-amber-600 text-white transition-colors group-hover:bg-amber-600"
           >
-            <FaCode size={20} />
+            {/* <FaCode size={20} /> */}
+            <Image height={40} width={40} src={DP} alt="img"/>
           </motion.span>
           <span className="text-[11px] font-bold text-zinc-950 dark:text-white">
             YASH KASHYAP<span className="text-amber-600">.</span>
